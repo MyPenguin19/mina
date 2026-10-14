@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, QrCode, UtensilsCrossed, ChefHat, Wallet, ClipboardList, Table2, Users, Check, Plus } from "lucide-react";
+import { ArrowRight, QrCode, ChefHat, Wallet, Table2, Check, Plus } from "lucide-react";
 import { LandingNavigation } from "@/components/marketing/landing-navigation";
-import { OrdersList } from "@/components/dashboard/orders-list";
+import { WorkspacePreview } from "@/components/marketing/workspace-preview";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -13,27 +13,24 @@ export const metadata: Metadata = {
 };
 
 const STEPS = [
-  { title: "Scan", icon: QrCode, description: "Customers scan the QR code assigned to their table. Their table is identified automatically." },
-  { title: "Order", icon: UtensilsCrossed, description: "They browse your menu, choose items and submit an order from their browser." },
-  { title: "Prepare", icon: ChefHat, description: "Kitchen staff see incoming orders. Waiters see what is ready to serve and respond to table requests." },
-  { title: "Pay", icon: Wallet, description: "Customers request their bill and use your supported payment methods. Your cashier records the payment." },
+  { title: "Scan", icon: QrCode, description: "Customers scan the QR code assigned to their table. No app download required." },
+  { title: "Order", icon: QrCode, description: "Customers browse your menu and place orders directly from their phones." },
+  { title: "Prepare", icon: ChefHat, description: "Orders appear in the kitchen, where your team can update their progress." },
+  { title: "Pay", icon: Wallet, description: "Customers request their bill and pay using the methods supported by your restaurant." },
 ];
 const FEATURES = [
-  { title: "A QR for every table", icon: QrCode, description: "Generate and download table-specific QR codes. Update your menu without reprinting them." },
-  { title: "Your menu, easy to manage", icon: UtensilsCrossed, description: "Organize categories, item photos, prices and availability in one place." },
-  { title: "Live order tracking", icon: ClipboardList, description: "Customers follow their order status while your team keeps service moving." },
-  { title: "Connected staff workflows", icon: Users, description: "Dedicated kitchen, waiter and cashier screens, with role and PIN sign-in for floor staff." },
-  { title: "Tables and visits", icon: Table2, description: "See table status and group orders into the current table visit." },
-  { title: "Payment management", icon: Wallet, description: "Record cash, card and UPI payments. Show a UPI payment QR when your restaurant has configured one." },
-  { title: "A clear activity overview", icon: ClipboardList, description: "See today’s orders, pending orders, active tables and today’s order revenue. Detailed analytics are not yet available." },
+  { title: "QR Ordering", icon: QrCode, description: "Give every table its own QR code. Customers can browse and order without downloading an app." },
+  { title: "Kitchen Management", icon: ChefHat, description: "Keep incoming orders organized and let staff update preparation status." },
+  { title: "Tables & Staff", icon: Table2, description: "Manage table visits, staff access, and daily service from one workspace." },
+  { title: "Payment Management", icon: Wallet, description: "Track bill requests and record supported payments without replacing your existing POS." },
 ];
 const FAQ = [
-  { question: "Do I need to replace my POS?", answer: "QR.CR can be used alongside your existing POS for QR ordering and staff coordination. It does not currently synchronize with or integrate into your POS." },
-  { question: "Do customers need to download an app?", answer: "No. The table QR opens the menu in their phone’s browser, where they can place an order and track its status." },
-  { question: "Can multiple customers order from the same table?", answer: "Yes. Customers can place separate orders using the same table QR. Orders are associated with the table’s current open visit; carts remain separate on each device." },
-  { question: "How do restaurant staff receive orders?", answer: "Kitchen, waiter and cashier screens refresh automatically. Kitchen staff manage preparation, waiters see ready orders and table requests, and cashiers manage bills." },
-  { question: "How does payment work?", answer: "Customers request their bill from the table menu. Your cashier records cash, card or UPI payments. If a UPI ID is configured, the cashier can show a payment QR for the customer to use in their UPI app. QR.CR does not process cards or confirm payments automatically." },
-  { question: "Can I cancel my subscription?", answer: "Self-service subscription cancellation is not currently available. Billing availability, subscription terms and cancellation arrangements must be confirmed before subscribing." },
+  { question: "Do I need to replace my POS?", answer: "No. QR.CR is designed to work alongside your existing restaurant operations. POS synchronization is not currently supported." },
+  { question: "Do customers need to download an app?", answer: "No. Customers scan a QR code and use their phone’s browser." },
+  { question: "Can multiple customers order from the same table?", answer: "Yes. Multiple devices can participate in the same open table visit." },
+  { question: "How does the kitchen receive orders?", answer: "Orders appear in the staff workspace, where kitchen staff can manage preparation." },
+  { question: "How do payments work?", answer: "Customers can request their bill. Available methods depend on the restaurant’s configuration. Cashiers record payments; a configured UPI QR lets customers pay in their UPI app. Card processing and automatic payment confirmation are not built in." },
+  { question: "Can I cancel my subscription?", answer: "Paid subscriptions are not yet publicly available. Cancellation terms will be provided before billing opens; self-service cancellation is not currently available." },
 ];
 
 export default function Home() {
@@ -46,24 +43,15 @@ export default function Home() {
           <p className="text-xs font-medium uppercase tracking-widest text-secondary-text">QR ordering. One connected team.</p>
           <div className="max-w-3xl">
             <h1 id="hero-title" className="text-4xl font-semibold leading-tight tracking-tight sm:text-6xl">Scan. Order. Pay.</h1>
-            <p className="mt-5 text-xl font-medium leading-8 tracking-tight sm:text-2xl">Everything your restaurant needs to manage QR ordering, in one simple place.</p>
-            <p className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-secondary-text sm:text-base">Let customers scan a table QR code, browse your menu and place orders from their phones. They can request a bill and pay using your restaurant’s supported methods. Keep your kitchen and staff connected alongside your existing POS.</p>
+            <p className="mt-5 text-xl font-medium leading-8 tracking-tight sm:text-2xl">Simple QR ordering for restaurants and cafés.</p>
+            <p className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-secondary-text sm:text-base">Let customers scan, order, and request payment from their phones. Keep your tables, kitchen, and staff connected in one simple workspace.</p>
           </div>
           <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-            <Button asChild size="lg"><Link href="/signup">Start Free Trial <ArrowRight aria-hidden /></Link></Button>
-            <Button asChild size="lg" variant="outline"><a href="#how-it-works">See How It Works</a></Button>
+            <Button asChild size="lg"><Link href="/signup">Get Started <ArrowRight aria-hidden /></Link></Button>
+            <Button asChild size="lg" variant="outline"><Link href="/demo">Try Interactive Demo</Link></Button>
           </div>
           <p className="text-xs text-secondary-text">Your menu, tables and team in one workspace.</p>
-          <figure className="mt-4 w-full max-w-4xl text-left">
-            <div className="rounded-xl border bg-muted/40 p-3 sm:p-5">
-              <div className="mb-4 flex flex-wrap items-center justify-between gap-2 px-1">
-                <span className="text-sm font-medium">One place to keep orders organized</span>
-                <span className="text-xs text-secondary-text">Order management preview</span>
-              </div>
-              <OrdersList orders={[]} />
-            </div>
-            <figcaption className="mt-3 text-center text-xs leading-5 text-secondary-text">An empty-state preview of your order feed. New orders appear as customers scan and order.</figcaption>
-          </figure>
+          <WorkspacePreview />
         </section>
 
         <section id="how-it-works" aria-labelledby="how-title" className="scroll-mt-24 border-t py-10 sm:py-12">
@@ -82,7 +70,7 @@ export default function Home() {
         <section aria-labelledby="features-title" className="border-t py-10 sm:py-12">
           <h2 id="features-title" className="text-2xl font-semibold tracking-tight sm:text-3xl">The essentials, working together.</h2>
           <p className="mt-2 max-w-2xl text-sm leading-6 text-secondary-text">A focused workspace for your menu, tables and the people who make service happen.</p>
-          <div className="mt-6 grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-6 grid gap-x-8 gap-y-6 sm:grid-cols-2">
             {FEATURES.map(({ title, icon: Icon, description }) => (
               <div key={title} className="min-w-0 border-t pt-5"><Icon aria-hidden className="mb-3 size-5 text-secondary-text" /><h3 className="text-sm font-semibold">{title}</h3><p className="mt-2 text-secondary-body leading-6 text-secondary-text">{description}</p></div>
             ))}
@@ -90,13 +78,13 @@ export default function Home() {
         </section>
 
         <section id="pricing" aria-labelledby="pricing-title" className="scroll-mt-24 grid items-start gap-6 border-t py-10 sm:py-12 lg:grid-cols-2">
-          <div><p className="text-xs font-medium uppercase tracking-widest text-secondary-text">Pricing</p><h2 id="pricing-title" className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">Simple pricing. No surprises.</h2><p className="mt-3 max-w-md text-sm leading-6 text-secondary-text">A straightforward proposed launch offer for each restaurant location.</p></div>
+          <div><p className="text-xs font-medium uppercase tracking-widest text-secondary-text">Pricing</p><h2 id="pricing-title" className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">Simple pricing. No surprises.</h2><p className="mt-3 max-w-md text-sm leading-6 text-secondary-text">One simple plan for each restaurant location. Join early access while public billing is being prepared.</p></div>
           <Card><CardContent className="flex flex-col gap-5">
-            <Badge variant="outline">Proposed pricing</Badge>
+            <Badge variant="outline">Early access</Badge><h3 className="text-base font-semibold">QR.CR</h3>
             <div><p className="text-4xl font-semibold tracking-tight tabular-nums">$9.99<span className="ml-1 text-sm font-normal text-secondary-text">/month</span></p><p className="mt-2 text-sm text-secondary-text">Per restaurant location</p></div>
-            <ul className="flex flex-col gap-3 text-sm">{["No QR.CR per-order commission", "Restaurant pays its own payment processing fees", "One proposed subscription per location", "Supported QR ordering and management features"].map(item => <li key={item} className="flex items-start gap-2"><Check aria-hidden className="mt-0.5 size-4 shrink-0 text-success" />{item}</li>)}</ul>
-            <p className="border-t pt-4 text-xs leading-5 text-secondary-text">Proposed offer, not an available checkout plan. Billing availability, included features and subscription terms are to be confirmed.</p>
-            <Button asChild size="lg"><Link href="/signup">Start Free Trial</Link></Button>
+            <ul className="flex flex-col gap-3 text-sm">{["QR menu and table ordering", "Kitchen order management", "Table and visit management", "Staff access", "Payment tracking", "No QR.CR per-order commission", "Restaurant pays applicable payment processing fees"].map(item => <li key={item} className="flex items-start gap-2"><Check aria-hidden className="mt-0.5 size-4 shrink-0 text-success" />{item}</li>)}</ul>
+            <p className="border-t pt-4 text-xs leading-5 text-secondary-text">Early-access signup is open. Paid subscriptions are not yet available; the $9.99/location launch offer will be confirmed before billing begins.</p>
+            <Button asChild size="lg"><Link href="/signup">Get Started — Early Access</Link></Button>
           </CardContent></Card>
         </section>
 
@@ -107,9 +95,13 @@ export default function Home() {
           </div>
         </section>
 
-        <section aria-labelledby="cta-title" className="flex flex-col items-center gap-5 border-t py-10 text-center sm:py-12"><h2 id="cta-title" className="text-2xl font-semibold tracking-tight sm:text-3xl">Ready to simplify restaurant ordering?</h2><Button asChild size="lg"><Link href="/signup">Get Started <ArrowRight aria-hidden /></Link></Button></section>
+        <section aria-labelledby="cta-title" className="flex flex-col items-center gap-5 border-t py-10 text-center sm:py-12">
+          <h2 id="cta-title" className="text-2xl font-semibold tracking-tight sm:text-3xl">Ready to simplify restaurant ordering?</h2>
+          <p className="text-sm text-secondary-text">One simple system for your menu, tables, orders, and team.</p>
+          <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row"><Button asChild size="lg"><Link href="/signup">Get Started <ArrowRight aria-hidden /></Link></Button><Button asChild size="lg" variant="outline"><Link href="/demo">Try Interactive Demo</Link></Button></div>
+        </section>
       </main>
-      <footer className="border-t"><div className="mx-auto flex max-w-workspace flex-col gap-4 px-4 py-6 sm:px-6 md:flex-row md:items-center md:justify-between"><Link href="/" className="text-sm font-semibold">QR.CR</Link><nav aria-label="Footer" className="flex flex-wrap gap-x-6 gap-y-2 text-secondary-body text-secondary-text"><Link href="/login" className="inline-flex min-h-11 items-center hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring">Sign In</Link><Link href="/staff" className="inline-flex min-h-11 items-center hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring">Staff Sign In</Link><a href="#pricing" className="inline-flex min-h-11 items-center hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring">Pricing</a></nav></div></footer>
+      <footer className="border-t"><div className="mx-auto flex max-w-workspace flex-col gap-4 px-4 py-6 sm:px-6 md:flex-row md:items-center md:justify-between"><div><Link href="/" className="text-sm font-semibold">QR.CR</Link><p className="mt-1 text-xs text-secondary-text">Simple QR ordering for restaurants and cafés.</p></div><nav aria-label="Footer" className="flex flex-wrap gap-x-6 gap-y-2 text-secondary-body text-secondary-text"><Link href="/login" className="inline-flex min-h-11 items-center hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring">Sign In</Link><Link href="/staff" className="inline-flex min-h-11 items-center hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring">Staff Sign In</Link><a href="#pricing" className="inline-flex min-h-11 items-center hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring">Pricing</a></nav></div></footer>
     </div>
   );
 }
