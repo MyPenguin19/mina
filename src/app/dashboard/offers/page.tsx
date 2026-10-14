@@ -1,3 +1,4 @@
+import { PageHeader } from "@/components/dashboard/page-header";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { requireCurrentRestaurant } from "@/lib/restaurant";
@@ -14,13 +15,8 @@ export default async function OffersPage() {
     .order("created_at", { ascending: false });
 
   return (
-    <div className="flex flex-col gap-6">
-      <div>
-        <h1 className="text-2xl font-semibold">Offers</h1>
-        <p className="text-muted-foreground">
-          Percentage, flat, BOGO, combo, happy-hour and coupon offers.
-        </p>
-      </div>
+    <div className="flex min-w-0 flex-col gap-6">
+      <PageHeader title="Offers">Percentage, flat, BOGO, combo, happy-hour and coupon offers.</PageHeader>
 
       <Card>
         <CardHeader>
@@ -28,9 +24,9 @@ export default async function OffersPage() {
         </CardHeader>
         <CardContent className="flex flex-col gap-2">
           {(offers ?? []).map((offer) => (
-            <div key={offer.id} className="flex items-center justify-between border-b py-2 last:border-0">
+            <div key={offer.id} className="flex flex-wrap items-center justify-between gap-3 border-b py-3 last:border-0">
               <div>
-                <p className="font-medium">{offer.name}</p>
+                <p className="break-words font-medium">{offer.name}</p>
                 <p className="text-xs text-muted-foreground capitalize">{offer.type.replace("_", " ")}</p>
               </div>
               <Badge variant={offer.is_active ? "brand" : "outline"}>

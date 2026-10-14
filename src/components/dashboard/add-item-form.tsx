@@ -6,6 +6,7 @@ import { addMenuItem } from "@/app/actions/menu";
 import { Button } from "@/components/ui/button";
 import { ImageUpload } from "@/components/ui/image-upload";
 import { Input } from "@/components/ui/input";
+import { Select } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 
 export function AddItemForm({
@@ -30,9 +31,9 @@ export function AddItemForm({
   }
 
   return (
-    <form action={formAction} className="flex flex-wrap items-end gap-3">
+    <form action={formAction} className="grid items-end gap-4 sm:grid-cols-2">
       <input type="hidden" name="imageUrl" value={imageUrl ?? ""} />
-      <div className="flex w-full flex-col gap-1.5">
+      <div className="flex min-w-0 flex-col gap-1.5 sm:col-span-2">
         <Label>Photo</Label>
         <ImageUpload
           bucket="menu-images"
@@ -43,26 +44,26 @@ export function AddItemForm({
           label="Add photo"
         />
       </div>
-      <div className="flex flex-col gap-1.5">
+      <div className="flex min-w-0 flex-col gap-1.5">
         <Label htmlFor="categoryId">Category</Label>
-        <select
+        <Select
           id="categoryId"
           name="categoryId"
           required
-          className="h-9 rounded-md border border-input bg-transparent px-3 text-sm shadow-xs"
+
         >
           {categories.map((category) => (
             <option key={category.id} value={category.id}>
               {category.name}
             </option>
           ))}
-        </select>
+        </Select>
       </div>
-      <div className="flex flex-col gap-1.5">
+      <div className="flex min-w-0 flex-col gap-1.5">
         <Label htmlFor="itemName">Item name</Label>
-        <Input id="itemName" name="name" placeholder="Cappuccino" required className="w-48" />
+        <Input id="itemName" name="name" placeholder="Cappuccino" required className="w-full" />
       </div>
-      <div className="flex flex-col gap-1.5">
+      <div className="flex min-w-0 flex-col gap-1.5">
         <Label htmlFor="basePrice">Price (₹)</Label>
         <Input
           id="basePrice"
@@ -72,17 +73,17 @@ export function AddItemForm({
           step="0.01"
           placeholder="149"
           required
-          className="w-28"
+          className="w-full"
         />
       </div>
       <label className="flex items-center gap-2 pb-2 text-sm">
         <input type="checkbox" name="isVeg" defaultChecked className="size-4" />
         Veg
       </label>
-      <Button type="submit" disabled={isPending}>
+      <Button type="submit" disabled={isPending} className="w-full sm:w-fit">
         {isPending ? "Adding…" : "Add item"}
       </Button>
-      {state.error ? <p className="w-full text-sm text-destructive">{state.error}</p> : null}
+      {state.error ? <p className="text-sm text-destructive sm:col-span-2">{state.error}</p> : null}
     </form>
   );
 }

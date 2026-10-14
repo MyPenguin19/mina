@@ -1,6 +1,4 @@
-import { AutoRefresh } from "@/components/auto-refresh";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { DashboardOverview } from "@/components/dashboard/dashboard-overview";
 import { requireCurrentRestaurant } from "@/lib/restaurant";
 import { createClient } from "@/lib/supabase/server";
 
@@ -47,56 +45,5 @@ export default async function DashboardOverviewPage() {
     { label: "Today's Revenue", value: `₹${todayRevenue}` },
   ];
 
-  return (
-    <div className="flex flex-col gap-6">
-      <AutoRefresh intervalMs={8000} />
-      <div>
-        <h1 className="text-2xl font-semibold">Welcome back</h1>
-        <p className="text-muted-foreground">{restaurant.restaurantName} — live overview</p>
-      </div>
-
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {stats.map((stat) => (
-          <Card key={stat.label}>
-            <CardHeader>
-              <CardTitle className="text-sm font-medium text-muted-foreground">
-                {stat.label}
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-3xl font-semibold">{stat.value}</p>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-
-      <Card>
-        <CardHeader>
-          <CardTitle>Live order feed</CardTitle>
-        </CardHeader>
-        <CardContent className="flex flex-col gap-2">
-          {(recentOrders ?? []).map((order) => (
-            <div key={order.id} className="flex items-center justify-between border-b py-2 last:border-0">
-              <div>
-                <p className="font-medium">Order #{order.order_number}</p>
-                <p className="text-xs text-muted-foreground">
-                  {order.order_items.map((i) => `${i.item_name} × ${i.quantity}`).join(", ")}
-                </p>
-              </div>
-              <div className="flex items-center gap-3">
-                <span className="font-medium">₹{order.total_amount}</span>
-                <Badge>{order.status}</Badge>
-              </div>
-            </div>
-          ))}
-          {(!recentOrders || recentOrders.length === 0) && (
-            <p className="text-sm text-muted-foreground">
-              No orders yet. Once customers start scanning table QR codes, live orders will appear
-              here.
-            </p>
-          )}
-        </CardContent>
-      </Card>
-    </div>
-  );
+  return <DashboardOverview stats={stats} recentOrders={recentOrders ?? []} restaurantName={restaurant.restaurantName} />;
 }

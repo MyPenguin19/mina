@@ -1,3 +1,4 @@
+import { PageHeader } from "@/components/dashboard/page-header";
 import { AddCategoryForm } from "@/components/dashboard/add-category-form";
 import { AddItemForm } from "@/components/dashboard/add-item-form";
 import { Badge } from "@/components/ui/badge";
@@ -16,13 +17,10 @@ export default async function MenuPage() {
     .order("sort_order");
 
   return (
-    <div className="flex flex-col gap-6">
-      <div>
-        <h1 className="text-2xl font-semibold">Menu</h1>
-        <p className="text-muted-foreground">Categories, items and pricing.</p>
-      </div>
+    <div className="flex min-w-0 flex-col gap-6">
+      <PageHeader title="Menu">Categories, items and pricing.</PageHeader>
 
-      <div className="grid gap-4 lg:grid-cols-2">
+      <div className="grid items-start gap-4 xl:grid-cols-3">
         <Card>
           <CardHeader>
             <CardTitle className="text-base">Add a category</CardTitle>
@@ -32,7 +30,7 @@ export default async function MenuPage() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="xl:col-span-2">
           <CardHeader>
             <CardTitle className="text-base">Add an item</CardTitle>
           </CardHeader>
@@ -57,8 +55,8 @@ export default async function MenuPage() {
                 <p className="text-sm text-muted-foreground">No items yet.</p>
               )}
               {category.menu_items.map((item) => (
-                <div key={item.id} className="flex items-center justify-between border-b py-2 last:border-0">
-                  <div className="flex items-center gap-3">
+                <div key={item.id} className="flex flex-wrap items-center justify-between gap-3 border-b py-3 last:border-0">
+                  <div className="flex min-w-0 flex-1 items-center gap-3">
                     {item.image_url ? (
                       // eslint-disable-next-line @next/next/no-img-element
                       <img
@@ -70,12 +68,12 @@ export default async function MenuPage() {
                       <div className="size-10 shrink-0 rounded-md border border-dashed" />
                     )}
                     <span
-                      className={`size-2.5 rounded-sm border ${item.is_veg ? "border-green-600 bg-green-600" : "border-red-600 bg-red-600"}`}
+                      className={`size-2.5 shrink-0 rounded-sm border ${item.is_veg ? "border-success bg-success" : "border-destructive bg-destructive"}`}
                     />
-                    <span>{item.name}</span>
-                    {!item.is_available && <Badge variant="outline">Unavailable</Badge>}
+                    <span className="min-w-0 flex-1 break-words"><span className="sr-only">{item.is_veg ? "Vegetarian: " : "Non-vegetarian: "}</span>{item.name}</span>
+                    {!item.is_available && <Badge variant="destructive">Unavailable</Badge>}
                   </div>
-                  <span className="font-medium">₹{item.base_price}</span>
+                  <span className="shrink-0 font-medium tabular-nums">₹{item.base_price}</span>
                 </div>
               ))}
             </CardContent>

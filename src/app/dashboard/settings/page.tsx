@@ -1,3 +1,4 @@
+import { PageHeader } from "@/components/dashboard/page-header";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { RestaurantSettingsForm } from "@/components/dashboard/restaurant-settings-form";
 import { requireCurrentRestaurant } from "@/lib/restaurant";
@@ -16,11 +17,8 @@ export default async function SettingsPage() {
     .single();
 
   return (
-    <div className="flex flex-col gap-6">
-      <div>
-        <h1 className="text-2xl font-semibold">Settings</h1>
-        <p className="text-muted-foreground">Restaurant profile, tax and service charge.</p>
-      </div>
+    <div className="flex min-w-0 flex-col gap-6">
+      <PageHeader title="Settings">Restaurant profile, tax and service charge.</PageHeader>
 
       <Card>
         <CardHeader>

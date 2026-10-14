@@ -11,12 +11,12 @@ export function AddCategoryForm() {
   const [state, formAction, isPending] = useActionState(addMenuCategory, { error: null });
 
   return (
-    <form action={formAction} className="flex flex-wrap items-end gap-3">
+    <form action={formAction} className="flex flex-col gap-4">
       <div className="flex flex-col gap-1.5">
         <Label htmlFor="categoryName">Category name</Label>
-        <Input id="categoryName" name="name" placeholder="Coffee" required className="w-48" />
+        <Input id="categoryName" name="name" placeholder="Coffee" required className="w-full" />
       </div>
-      <Button type="submit" disabled={isPending}>
+      <Button type="submit" disabled={isPending} className="w-full sm:w-fit">
         {isPending ? "Adding…" : "Add category"}
       </Button>
       {state.error ? <p className="w-full text-sm text-destructive">{state.error}</p> : null}
