@@ -30,11 +30,11 @@ const NAV_ITEMS = [
   { href: "/dashboard/settings", label: "Settings", icon: Settings },
 ];
 
-export function SidebarNav() {
+export function SidebarNav({ onNavigate }: { onNavigate?: () => void } = {}) {
   const pathname = usePathname();
 
   return (
-    <nav className="flex flex-col gap-1">
+    <nav aria-label="Owner dashboard" className="flex flex-col gap-1">
       {NAV_ITEMS.map(({ href, label, icon: Icon }) => {
         const isActive = href === "/dashboard" ? pathname === href : pathname.startsWith(href);
 
@@ -42,11 +42,13 @@ export function SidebarNav() {
           <Link
             key={href}
             href={href}
+            onClick={onNavigate}
+            aria-current={isActive ? "page" : undefined}
             className={cn(
-              "flex items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium transition-colors",
+              "flex items-center min-h-11 gap-3 rounded-md px-3 py-2.5 text-sm font-medium transition-colors duration-150 outline-none focus-visible:ring-2 focus-visible:ring-ring",
               isActive
-                ? "bg-accent text-accent-foreground"
-                : "text-muted-foreground hover:bg-accent hover:text-accent-foreground",
+                ? "bg-sidebar-active text-foreground"
+                : "text-sidebar-foreground hover:bg-hover hover:text-foreground",
             )}
           >
             <Icon className="size-4" />
