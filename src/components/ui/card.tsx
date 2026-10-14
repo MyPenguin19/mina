@@ -42,7 +42,7 @@ function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="card-description"
-      className={cn("text-muted-foreground text-sm", className)}
+      className={cn("text-muted-foreground text-[length:var(--text-secondary-body)] leading-5", className)}
       {...props}
     />
   );
@@ -75,7 +75,7 @@ function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="card-footer"
-      className={cn("flex items-center px-5 [.border-t]:pt-6", className)}
+      className={cn("flex items-center px-5 [.border-t]:pt-5", className)}
       {...props}
     />
   );

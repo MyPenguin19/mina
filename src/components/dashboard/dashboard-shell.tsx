@@ -26,10 +26,10 @@ export function DashboardShell({ restaurantName, role, signOut, children }: {
   const pathname = usePathname();
   const title = TITLES[pathname] ?? "Dashboard";
   const identity = (
-    <div className="mb-5 flex min-w-0 items-center gap-3 rounded-md border bg-surface p-3">
+    <div className="mb-4 flex min-w-0 items-center gap-3 border-b px-3 pb-5">
       <Store aria-hidden className="size-4 shrink-0 text-secondary-text" />
-      <div className="min-w-0">
-        <p className="truncate text-sm font-medium" title={restaurantName}>{restaurantName}</p>
+      <div className="min-w-0 flex-1">
+        <p className="break-words text-label font-medium" title={restaurantName}>{restaurantName}</p>
         <p className="mt-0.5 text-xs capitalize text-secondary-text">{role}</p>
       </div>
     </div>
@@ -37,8 +37,8 @@ export function DashboardShell({ restaurantName, role, signOut, children }: {
 
   return (
     <div className="min-h-screen md:flex">
-      <aside className="sticky top-0 hidden h-screen w-60 shrink-0 flex-col overflow-y-auto border-r bg-sidebar px-3 py-5 md:flex">
-        <Link href="/dashboard" className="mb-7 px-3 text-sm font-semibold tracking-[0.16em] focus-visible:outline-2 focus-visible:outline-ring">THALIQ</Link>
+      <aside className="sticky top-0 hidden h-screen w-sidebar shrink-0 flex-col overflow-y-auto border-r bg-sidebar px-3 py-5 md:flex">
+        <Link href="/dashboard" className="mb-6 px-3 text-sm font-semibold tracking-[0.16em] focus-visible:outline-2 focus-visible:outline-ring">THALIQ</Link>
         {identity}
         <SidebarNav />
         <div className="mt-auto border-t pt-4">{signOut}</div>
@@ -60,11 +60,11 @@ export function DashboardShell({ restaurantName, role, signOut, children }: {
                 </div>
               </DialogContent>
             </Dialog>
-            <span className="truncate text-sm font-medium">{title}</span>
+            <span className="break-words text-label font-medium">{title}</span>
           </div>
           <AppearanceToggle />
         </header>
-        <main id="dashboard-content" className="mx-auto w-full min-w-0 max-w-7xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">{children}</main>
+        <main id="dashboard-content" className="mx-auto w-full min-w-0 max-w-workspace px-4 py-6 sm:px-6 lg:px-8">{children}</main>
       </div>
     </div>
   );

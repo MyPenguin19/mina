@@ -128,22 +128,30 @@
   --color-input: var(--input);
   --color-divider: var(--divider);
   --color-sidebar-foreground: var(--sidebar-foreground);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 2px);
+  --container-workspace: 75rem;
+  --spacing-sidebar: 14rem;
+  --text-metric: 1.75rem;
+  --text-metric--line-height: 1.25;
+  --text-secondary-body: 0.8125rem;
+  --text-secondary-body--line-height: 1.5;
+  --text-label: 0.8125rem;
+  --text-label--line-height: 1.5;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 @layer base {
   * { @apply border-border outline-ring/50; }
-  body { @apply bg-background font-sans text-foreground; }
+  body { @apply bg-background font-sans text-sm leading-5 text-foreground; }
   button, input, select, textarea, a { -webkit-tap-highlight-color: transparent; }
   select, textarea {
     @apply rounded-md border border-input bg-surface text-foreground outline-none transition-colors duration-150;
   }
-  select:focus-visible, textarea:focus-visible { @apply border-ring ring-2 ring-ring/20; }
+  select:focus-visible, textarea:focus-visible { @apply border-ring ring-2 ring-ring; }
   select:disabled, textarea:disabled { @apply opacity-50; }
 }
 @media (prefers-reduced-motion: reduce) {
