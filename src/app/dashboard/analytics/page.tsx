@@ -1,3 +1,4 @@
+import { PageHeader } from "@/components/dashboard/page-header";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { requireCurrentRestaurant } from "@/lib/restaurant";
 
@@ -13,11 +14,8 @@ export default async function AnalyticsPage() {
   await requireCurrentRestaurant();
 
   return (
-    <div className="flex flex-col gap-6">
-      <div>
-        <h1 className="text-2xl font-semibold">Analytics</h1>
-        <p className="text-muted-foreground">Insights populate automatically as orders come in.</p>
-      </div>
+    <div className="flex min-w-0 flex-col gap-6">
+      <PageHeader title="Analytics">Insights populate automatically as orders come in.</PageHeader>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {SECTIONS.map((section) => (
@@ -27,7 +25,7 @@ export default async function AnalyticsPage() {
             </CardHeader>
             <CardContent>
               <p className="text-sm text-muted-foreground">{section.description}</p>
-              <p className="mt-4 text-2xl font-semibold text-muted-foreground/60">—</p>
+              <p className="mt-4 text-2xl font-semibold text-muted-foreground">—</p>
             </CardContent>
           </Card>
         ))}

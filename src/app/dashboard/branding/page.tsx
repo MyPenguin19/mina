@@ -1,3 +1,4 @@
+import { PageHeader } from "@/components/dashboard/page-header";
 import Link from "next/link";
 
 import { BrandingForm } from "@/components/dashboard/branding-form";
@@ -37,14 +38,9 @@ export default async function BrandingPage() {
   const canUsePremium = !subscription || tier !== "starter";
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex min-w-0 flex-col gap-6">
       <div className="flex flex-wrap items-end justify-between gap-3">
-        <div>
-          <h1 className="text-2xl font-semibold">Branding</h1>
-          <p className="text-muted-foreground">
-            Change how your QR menu looks. Your menu items and prices stay exactly as they are.
-          </p>
-        </div>
+        <PageHeader title="Branding">Change how your QR menu looks. Your menu items and prices stay exactly as they are.</PageHeader>
         {branch ? (
           <Link
             href={`/menu/${restaurant.restaurantSlug}/${branch.slug}`}

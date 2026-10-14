@@ -35,11 +35,11 @@ export function RestaurantSettingsForm({
   const [coverUrl, setCoverUrl] = useState(restaurant.cover_image_url);
 
   return (
-    <form action={formAction} className="flex max-w-xl flex-col gap-4">
+    <form action={formAction} className="grid w-full items-start gap-4 sm:grid-cols-2">
       <input type="hidden" name="logoUrl" value={logoUrl ?? ""} />
       <input type="hidden" name="coverImageUrl" value={coverUrl ?? ""} />
 
-      <div className="flex flex-wrap gap-6">
+      <div className="grid gap-4 sm:grid-cols-2 sm:col-span-2">
         <div className="flex flex-col gap-1.5">
           <Label>Logo</Label>
           <ImageUpload
@@ -72,11 +72,11 @@ export function RestaurantSettingsForm({
         <Label htmlFor="phone">Phone</Label>
         <Input id="phone" name="phone" defaultValue={restaurant.phone ?? ""} />
       </div>
-      <div className="flex flex-col gap-1.5">
+      <div className="flex flex-col gap-1.5 sm:col-span-2">
         <Label htmlFor="description">Description</Label>
         <Input id="description" name="description" defaultValue={restaurant.description ?? ""} />
       </div>
-      <div className="flex gap-4">
+      <div className="grid grid-cols-2 gap-4 sm:col-span-2">
         <div className="flex flex-col gap-1.5">
           <Label htmlFor="taxPercent">Tax %</Label>
           <Input
@@ -86,7 +86,7 @@ export function RestaurantSettingsForm({
             step="0.01"
             min="0"
             defaultValue={restaurant.tax_percent}
-            className="w-28"
+            className="w-full"
           />
         </div>
         <div className="flex flex-col gap-1.5">
@@ -98,11 +98,11 @@ export function RestaurantSettingsForm({
             step="0.01"
             min="0"
             defaultValue={restaurant.service_charge_percent}
-            className="w-28"
+            className="w-full"
           />
         </div>
       </div>
-      <div className="flex flex-col gap-3 border-t pt-4">
+      <div className="flex flex-col gap-3 border-t pt-4 sm:col-span-2">
         <div>
           <Label className="text-base">UPI payments</Label>
           <p className="text-sm text-muted-foreground">
@@ -110,7 +110,7 @@ export function RestaurantSettingsForm({
             to your account — no gateway, no commission.
           </p>
         </div>
-        <div className="flex flex-wrap gap-4">
+        <div className="grid gap-4 sm:grid-cols-2">
           <div className="flex flex-col gap-1.5">
             <Label htmlFor="upiId">UPI ID</Label>
             <Input
@@ -120,7 +120,7 @@ export function RestaurantSettingsForm({
               placeholder="thecoffeehouse@okhdfcbank"
               autoCapitalize="none"
               spellCheck={false}
-              className="w-64"
+              className="w-full"
             />
           </div>
           <div className="flex flex-col gap-1.5">
@@ -130,14 +130,14 @@ export function RestaurantSettingsForm({
               name="upiDisplayName"
               defaultValue={restaurant.upi_display_name ?? ""}
               placeholder="Defaults to restaurant name"
-              className="w-64"
+              className="w-full"
             />
           </div>
         </div>
       </div>
 
-      {state.error ? <p className="text-sm text-destructive">{state.error}</p> : null}
-      {state.success ? <p className="text-sm text-brand">Saved.</p> : null}
+      {state.error ? <p className="text-sm text-destructive sm:col-span-2">{state.error}</p> : null}
+      {state.success ? <p className="text-sm text-brand sm:col-span-2">Saved.</p> : null}
       <Button type="submit" disabled={isPending} className="w-fit">
         {isPending ? "Saving…" : "Save changes"}
       </Button>

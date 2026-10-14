@@ -1,3 +1,4 @@
+import { PageHeader } from "@/components/dashboard/page-header";
 import QRCode from "qrcode";
 
 import { AddStaffForm } from "@/components/dashboard/add-staff-form";
@@ -25,11 +26,8 @@ export default async function StaffPage() {
   ]);
 
   return (
-    <div className="flex flex-col gap-6">
-      <div>
-        <h1 className="text-2xl font-semibold">Staff</h1>
-        <p className="text-muted-foreground">Waiters, kitchen and cashier accounts sign in with a role + PIN.</p>
-      </div>
+    <div className="flex min-w-0 flex-col gap-6">
+      <PageHeader title="Staff">Waiters, kitchen and cashier accounts sign in with a role + PIN.</PageHeader>
 
       <Card>
         <CardHeader>
@@ -68,14 +66,14 @@ export default async function StaffPage() {
         </CardHeader>
         <CardContent className="flex flex-col gap-2">
           {(staff ?? []).map((member) => (
-            <div key={member.id} className="flex items-center justify-between border-b py-2 last:border-0">
+            <div key={member.id} className="flex flex-wrap items-center justify-between gap-3 border-b py-3 last:border-0">
               <div>
-                <p className="font-medium">{member.name}</p>
+                <p className="break-words font-medium">{member.name}</p>
                 <p className="text-xs text-muted-foreground">
                   {(member.branches as unknown as { name: string } | null)?.name}
                 </p>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex shrink-0 flex-wrap items-center gap-2">
                 <Badge variant="outline" className="capitalize">
                   {member.role}
                 </Badge>

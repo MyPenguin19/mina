@@ -132,6 +132,7 @@
   --radius-md: var(--radius);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 2px);
+  --container-app: 90rem;
   --container-workspace: 75rem;
   --spacing-sidebar: 14rem;
   --text-metric: 1.75rem;

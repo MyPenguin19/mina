@@ -7,6 +7,7 @@ import { updateBranding } from "@/app/actions/branding";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Select } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 
@@ -37,7 +38,7 @@ export function BrandingForm({
 
       <div className="flex flex-col gap-3">
         <Label>Menu template</Label>
-        <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-3 lg:grid-cols-3 xl:grid-cols-4">
           {templates.map((template) => {
             const locked = template.is_premium && !canUsePremium;
             return (
@@ -47,7 +48,7 @@ export function BrandingForm({
                 disabled={locked}
                 onClick={() => setTemplateId(template.id)}
                 className={cn(
-                  "flex flex-col items-start gap-1 rounded-lg border p-3 text-left transition-colors",
+                  "flex flex-col items-start gap-1 rounded-lg border p-3 text-left transition-colors duration-150 outline-none focus-visible:ring-2 focus-visible:ring-ring",
                   templateId === template.id && "border-brand ring-2 ring-brand/40",
                   locked ? "cursor-not-allowed opacity-55" : "hover:bg-accent",
                 )}
@@ -70,15 +71,15 @@ export function BrandingForm({
         )}
       </div>
 
-      <div className="flex flex-wrap items-end gap-6">
-        <div className="flex flex-col gap-1.5">
+      <div className="grid items-end gap-4 sm:grid-cols-2">
+        <div className="flex min-w-0 flex-col gap-1.5">
           <Label htmlFor="primaryColor">Brand colour</Label>
           <div className="flex items-center gap-2">
             <input
               type="color"
               value={color}
               onChange={(e) => setColor(e.target.value)}
-              className="size-9 cursor-pointer rounded-md border bg-transparent"
+              className="size-10 shrink-0 cursor-pointer rounded-md border bg-transparent"
               aria-label="Pick brand colour"
             />
             <Input
@@ -86,23 +87,23 @@ export function BrandingForm({
               name="primaryColor"
               value={color}
               onChange={(e) => setColor(e.target.value)}
-              className="w-32 font-mono"
+              className="min-w-0 flex-1 font-mono"
             />
           </div>
         </div>
 
-        <div className="flex flex-col gap-1.5">
+        <div className="flex min-w-0 flex-col gap-1.5">
           <Label htmlFor="font">Font</Label>
-          <select
+          <Select
             id="font"
             value={font}
             onChange={(e) => setFont(e.target.value)}
-            className="h-9 rounded-md border border-input bg-transparent px-3 text-sm shadow-xs"
+
           >
             <option value="sans">Sans (modern)</option>
             <option value="serif">Serif (classic)</option>
             <option value="mono">Mono (minimal)</option>
-          </select>
+          </Select>
         </div>
       </div>
 

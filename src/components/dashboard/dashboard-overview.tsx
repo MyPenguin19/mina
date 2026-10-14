@@ -1,6 +1,7 @@
 import { ClipboardList, Clock3, Table2, IndianRupee } from "lucide-react";
 import { AutoRefresh } from "@/components/auto-refresh";
-import { Badge } from "@/components/ui/badge";
+import { StatusBadge } from "@/components/dashboard/status-badge";
+import { PageHeader } from "@/components/dashboard/page-header";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { EmptyState } from "@/components/ui/empty-state";
 import { Table, TableCell, TableHead } from "@/components/ui/table";
@@ -15,12 +16,6 @@ type RecentOrder = {
 
 const ICONS = [ClipboardList, Clock3, Table2, IndianRupee];
 
-function statusVariant(status: string) {
-  if (["served", "completed", "ready"].includes(status)) return "success";
-  if (status === "cancelled") return "destructive";
-  if (status === "pending") return "warning";
-  return "info";
-}
 
 export function DashboardOverview({ stats, recentOrders, restaurantName }: {
   stats: { label: string; value: string | number }[];
@@ -30,10 +25,7 @@ export function DashboardOverview({ stats, recentOrders, restaurantName }: {
   return (
     <div className="flex min-w-0 flex-col gap-6">
       <AutoRefresh intervalMs={8000} />
-      <div>
-        <h1 className="text-2xl font-semibold leading-8 tracking-tight">Welcome back</h1>
-        <p className="mt-1 break-words text-secondary-body text-secondary-text">{restaurantName} — live overview</p>
-      </div>
+      <PageHeader title="Welcome back">{restaurantName} — live overview</PageHeader>
 
       <div className="grid grid-cols-2 gap-4 xl:grid-cols-4">
         {stats.map((stat, index) => {
@@ -73,7 +65,7 @@ export function DashboardOverview({ stats, recentOrders, restaurantName }: {
                     <p className="mt-2 text-sm tabular-nums sm:hidden">₹{order.total_amount}</p>
                   </TableCell>
                   <TableCell className="hidden text-right tabular-nums sm:table-cell">₹{order.total_amount}</TableCell>
-                  <TableCell className="text-right"><Badge variant={statusVariant(order.status)} className="min-h-6 max-w-full whitespace-normal break-words capitalize">{order.status}</Badge></TableCell>
+                  <TableCell className="text-right"><StatusBadge status={order.status} /></TableCell>
                 </tr>
               ))}
             </tbody>

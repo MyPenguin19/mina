@@ -36,7 +36,7 @@ export function DashboardShell({ restaurantName, role, signOut, children }: {
   );
 
   return (
-    <div className="min-h-screen md:flex">
+    <div className="mx-auto min-h-screen w-full max-w-app border-x bg-background md:flex">
       <aside className="sticky top-0 hidden h-screen w-sidebar shrink-0 flex-col overflow-y-auto border-r bg-sidebar px-3 py-5 md:flex">
         <Link href="/dashboard" className="mb-6 px-3 text-sm font-semibold tracking-[0.16em] focus-visible:outline-2 focus-visible:outline-ring">THALIQ</Link>
         {identity}
@@ -44,7 +44,7 @@ export function DashboardShell({ restaurantName, role, signOut, children }: {
         <div className="mt-auto border-t pt-4">{signOut}</div>
       </aside>
       <div className="min-w-0 flex-1">
-        <header className="sticky top-0 z-30 flex h-16 items-center justify-between gap-3 border-b bg-background px-4 sm:px-6 lg:px-8">
+        <header className="sticky top-0 z-30 flex h-16 items-center justify-between gap-3 border-b bg-background px-4 sm:px-6">
           <div className="flex min-w-0 items-center gap-3">
             <Dialog open={open} onOpenChange={setOpen}>
               <DialogTrigger asChild>
@@ -64,7 +64,7 @@ export function DashboardShell({ restaurantName, role, signOut, children }: {
           </div>
           <AppearanceToggle />
         </header>
-        <main id="dashboard-content" className="mx-auto w-full min-w-0 max-w-workspace px-4 py-6 sm:px-6 lg:px-8">{children}</main>
+        <main id="dashboard-content" className="mx-auto w-full min-w-0 max-w-workspace px-4 py-6 sm:px-6">{children}</main>
       </div>
     </div>
   );
